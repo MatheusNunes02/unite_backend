@@ -4,11 +4,13 @@ import { CreateSupplierController } from '../controllers/CreateSupplierControlle
 
 import { multerconfig } from '../config/multer';
 import multer from 'multer';
+import { CreateCategoryController } from '../controllers/CreateCategoryController';
 
 const router = Router();
 
 const createMerchantController = new CreateMerchantController();
 const createSupplierController = new CreateSupplierController();
+const createCategoryController = new CreateCategoryController();
 
 router.get("/",(Request, Response) =>{
     return Response.json({
@@ -19,5 +21,7 @@ router.get("/",(Request, Response) =>{
 router.post("/merchants",multer(multerconfig).single('file'), createMerchantController.handle);
 
 router.post("/suppliers",multer(multerconfig).single('file'), createSupplierController.handle)
+
+router.post("/categories", createCategoryController.handle)
 
 export { router }
