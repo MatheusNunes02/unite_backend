@@ -1,11 +1,14 @@
 import { response, Router, Response, Request } from 'express';
 import { CreateMerchantController } from '../controllers/CreateMerchantController';
+import { CreateSupplierController } from '../controllers/CreateSupplierController';
+
 import { multerconfig } from '../config/multer';
 import multer from 'multer';
 
 const router = Router();
 
 const createMerchantController = new CreateMerchantController();
+const createSupplierController = new CreateSupplierController();
 
 router.get("/",(Request, Response) =>{
     return Response.json({
@@ -15,10 +18,6 @@ router.get("/",(Request, Response) =>{
 
 router.post("/merchants",multer(multerconfig).single('file'), createMerchantController.handle);
 
-router.post("/uploads",(request: Request, response: Response) =>{
-    console.log('./uploads/'+request.file?.filename)
-
-    return response.json({message:'foi?'})
-});
+router.post("/suppliers",multer(multerconfig).single('file'), createSupplierController.handle)
 
 export { router }

@@ -6,7 +6,6 @@
     "password":"",
     "database":"unite_database",
     "logging": false,
-    "synchronize": true,
     "migrationsTableName": "migrations",
     "migrations":["src/database/migrations/*.ts"],
     "entities":["src/entities/*.ts"],
