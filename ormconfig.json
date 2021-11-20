@@ -1,0 +1,17 @@
+{
+    "type":"mysql",
+    "host":"localhost",
+    "port":3306,
+    "username": "root",
+    "password":"",
+    "database":"unite_database",
+    "logging": false,
+    "synchronize": true,
+    "migrationsTableName": "migrations",
+    "migrations":["src/database/migrations/*.ts"],
+    "entities":["src/entities/*.ts"],
+    "cli":{
+        "migrationsDir":"src/database/migrations/",
+        "entitiesDir":"src/entities"
+    }
+}
