@@ -9,7 +9,7 @@ class CreateCategoryController{
 
         const createCategoryService = new CreateCategoryService();
 
-        const category = createCategoryService.execute({
+        const category = await createCategoryService.execute({
            category_name 
         })
 
