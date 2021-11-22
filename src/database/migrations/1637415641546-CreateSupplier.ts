@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableUnique} from "typeorm";
 
 export class CreateSupplier1637415641546 implements MigrationInterface {
 
@@ -9,7 +9,8 @@ export class CreateSupplier1637415641546 implements MigrationInterface {
                 columns:[
                     {
                         name:'id',
-                        type:'varchar'
+                        type:'varchar',
+                        isPrimary:true
                     },
                     {
                         name:'nome_empresa',

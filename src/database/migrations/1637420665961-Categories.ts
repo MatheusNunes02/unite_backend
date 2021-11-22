@@ -9,7 +9,8 @@ export class Categories1637420665961 implements MigrationInterface {
                 columns: [
                     {
                         name:'id',
-                        type:'varchar'
+                        type:'varchar',
+                        isPrimary:true
                     },
                     {
                         name:'category_name',
@@ -25,6 +26,8 @@ export class Categories1637420665961 implements MigrationInterface {
                         type:'timestamp',
                         default:"now()"
                     },
+
+                    
                 ]
             })
         )
@@ -32,6 +35,7 @@ export class Categories1637420665961 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+       await queryRunner.dropTable('categories')
     }
 
 }

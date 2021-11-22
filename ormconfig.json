@@ -5,6 +5,7 @@
     "username": "root",
     "password":"",
     "database":"unite_database",
+    "synchronize": true,
     "logging": false,
     "migrationsTableName": "migrations",
     "migrations":["src/database/migrations/*.ts"],
