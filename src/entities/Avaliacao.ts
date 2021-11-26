@@ -17,7 +17,7 @@ class Avaliacao{
     supplierId: Supplier
 
     @Column()
-    merchant_id:string;
+    merchant_id:string; 
 
     @JoinColumn({name:'merchant_id'})
     @ManyToOne(()=> Merchant)
@@ -28,6 +28,9 @@ class Avaliacao{
 
     @Column()
     nota:number;
+
+    @Column()
+    type:number;
 
     @CreateDateColumn()
     created_at: Date;
