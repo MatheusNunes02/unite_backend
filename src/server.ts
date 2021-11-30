@@ -3,6 +3,7 @@ import express,{Request,Response, NextFunction} from 'express';
 import "express-async-errors"
 import cors from 'cors';
 import { router } from "./services/routes";
+import path  from 'path';
 
 
 import "./database"
@@ -10,7 +11,9 @@ import "./database"
 const app = express();
 
 
-// app.use(cors())
+app.use(cors())
+
+
 //Definir que o express possa usar jsons
 app.use(express.json()); 
 
@@ -31,5 +34,7 @@ app.use((err: Error,request: Request, response: Response, next: NextFunction)=>{
     })
 })
 
+app.use('/uploads',express.static(path.join(__dirname, 'public/uploads')));
+console.log(__dirname)
 //Ouvir a porta 3000
-app.listen(3000, () => console.log("Server is running!!!"))
+app.listen(3000, () => console.log(`Server running!!!`))

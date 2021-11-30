@@ -24,7 +24,7 @@ class CreateSupplierController{
 
         const createSupplierService = new CreateSupplierService();
 
-        const foto = './uploads/'+request.file?.filename;
+        const foto = ''+request.file?.filename;
 
         const supplier = await createSupplierService.execute({
             nome_empresa,

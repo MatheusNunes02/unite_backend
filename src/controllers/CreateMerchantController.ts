@@ -20,7 +20,7 @@ class CreateMerchantController{
 
         const createMerchantService = new CreateMerchantService();
 
-        const foto = './uploads/'+request.file?.filename;
+        const foto = ''+request.file?.filename;
 
         const merchant = await createMerchantService.execute({
             name,
