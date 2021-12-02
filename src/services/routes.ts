@@ -8,12 +8,14 @@ import { CreateCategoryController } from '../controllers/CreateCategoryControlle
 import { CreateCategorySupplierController} from '../controllers/CreateCategorySupplierController'
 import { CreateAvaliacaoController } from '../controllers/CreateAvaliacaoController';
 import { ListMerchantController } from '../controllers/ListMerchantsController';
+import { AuthenticateUserController } from '../controllers/AuthenticateUserController';
 
 //Instância do Router do Express, serve para criar as rotas;
 const router = Router();
 
 const createMerchantController = new CreateMerchantController();
 const createSupplierController = new CreateSupplierController();
+const authenticateUserController = new AuthenticateUserController();
 const createCategoryController = new CreateCategoryController();
 const createCategorySupplierController = new CreateCategorySupplierController();
 const createAvaliacaoController = new CreateAvaliacaoController();
@@ -26,14 +28,16 @@ router.get("/",(Request, Response) =>{
     })
 })
 
-
+router.get("/merchants", listMerchantController.handle);
 
 //Cadastro de informações no banco de dados
-router.get("/merchants", listMerchantController.handle);
 router.post("/merchants",multer(multerconfig).single('file'), createMerchantController.handle);
 router.post("/suppliers",multer(multerconfig).single('file'), createSupplierController.handle)
 router.post("/categories", createCategoryController.handle)
 router.post("/suppliers/categories", createCategorySupplierController.handle)
 router.post("/avaliacao", createAvaliacaoController.handle)
+
+//Login
+router.post("/login", authenticateUserController.handle);
 
 export { router }
