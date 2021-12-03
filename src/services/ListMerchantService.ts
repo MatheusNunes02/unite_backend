@@ -1,15 +1,14 @@
-import { getCustomRepository } from 'typeorm';
-import { MerchantRepositories } from '../repositories/MerchantRepositories';
+import { getCustomRepository } from "typeorm";
+import { MerchantRepositories } from "../repositories/MerchantRepositories";
 
+class ListMerchantService {
+  async execute() {
+    const merchantRepositories = getCustomRepository(MerchantRepositories);
 
-class ListMerchantService{
-    async execute(){
-        const merchantRepositories = getCustomRepository(MerchantRepositories);
+    const merchants = await merchantRepositories.find();
 
-        const merchants = await merchantRepositories.find();
-
-        return merchants;
-    }
+    return merchants;
+  }
 }
 
-export { ListMerchantService}
+export { ListMerchantService };
