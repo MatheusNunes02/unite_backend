@@ -1,20 +1,21 @@
 import { getCustomRepository } from "typeorm";
-
-import { compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
-
 import { MerchantRepositories } from "../repositories/MerchantRepositories";
 import { SupplierRepositories } from "../repositories/SupplierRepositories";
 import { Merchant } from "../entities/Merchant";
 import { Supplier } from "../entities/Supplier";
+import { verify } from "jsonwebtoken";
 
-interface IAuthenticateRequest {
+interface IHeaderRequest {
   email: string;
-  password: string;
+  token: string;
 }
 
-class AuthenticateUserService {
-  async execute({ email, password }: IAuthenticateRequest) {
+interface IPayLoad {
+  sub: string;
+}
+
+class ValidateTokenService {
+  async execute({ email, token }: IHeaderRequest) {
     const merchantRepositories = getCustomRepository(MerchantRepositories);
     const supplierRepositories = getCustomRepository(SupplierRepositories);
 
@@ -37,32 +38,20 @@ class AuthenticateUserService {
     }
 
     if (!user) {
-      throw new Error("User not found");
+      throw new Error("Usuário não está cadastrado, acesso não permitido");
     }
 
-    const passwordmatch = await compare(password, user?.password);
+    try {
+      const { sub } = verify(
+        token,
+        "2a9bd0ff57f6d7242eaf60237b3b0179"
+      ) as IPayLoad;
 
-    if (!passwordmatch) {
-      throw new Error("Invalid data");
+      return true;
+    } catch (err) {
+      return false;
     }
-
-    //Gerando token com a chave em hashMD5
-    //unitedemoday
-    const token = sign(
-      {
-        email: user.email,
-      },
-
-      "2a9bd0ff57f6d7242eaf60237b3b0179",
-
-      {
-        subject: user.id,
-        expiresIn: "100d",
-      }
-    );
-
-    return { id: user.id, email: user.email, token };
   }
 }
 
-export { AuthenticateUserService };
+export { ValidateTokenService };
