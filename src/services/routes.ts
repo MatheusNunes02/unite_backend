@@ -10,6 +10,7 @@ import { CreateAvaliacaoController } from "../controllers/CreateAvaliacaoControl
 import { ListMerchantController } from "../controllers/ListMerchantsController";
 import { AuthenticateUserController } from "../controllers/AuthenticateUserController";
 import { ValidateTokenController } from "../controllers/ValidateTokenController";
+import { ListSupplierControllers } from "../controllers/ListSuppliersControllers";
 
 //Instância do Router do Express, serve para criar as rotas;
 const router = Router();
@@ -21,6 +22,7 @@ const createCategoryController = new CreateCategoryController();
 const createCategorySupplierController = new CreateCategorySupplierController();
 const createAvaliacaoController = new CreateAvaliacaoController();
 const listMerchantController = new ListMerchantController();
+const listSuppliersController = new ListSupplierControllers();
 
 const validateTokenController = new ValidateTokenController();
 
@@ -30,7 +32,7 @@ router.get("/", (Request, Response) => {
     erro: "Nada encontrado",
   });
 });
-
+router.get("/suppliers", listSuppliersController.handle);
 router.get("/merchants", listMerchantController.handle);
 
 //Cadastro de informações no banco de dados
