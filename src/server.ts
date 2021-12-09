@@ -35,6 +35,5 @@ app.use((err: Error,request: Request, response: Response, next: NextFunction)=>{
 })
 
 app.use('/uploads',express.static(path.join(__dirname, 'public/uploads')));
-console.log(__dirname)
 //Ouvir a porta 3000
 app.listen(3000, () => console.log(`Server running!!!`))
