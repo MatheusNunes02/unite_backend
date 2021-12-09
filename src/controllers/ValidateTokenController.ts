@@ -8,9 +8,6 @@ class ValidateTokenController {
 
     const { email, token } = request.body;
 
-    console.log(email);
-    console.log(token);
-
     const result = await validateTokenService.execute({ email, token });
 
     return response.json(result);

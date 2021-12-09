@@ -12,7 +12,6 @@ class AuthenticateUserController {
       password,
     });
 
-    console.log(request.headers);
 
     return response.json(data);
   }
